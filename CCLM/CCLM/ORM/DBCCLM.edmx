@@ -1,0 +1,177 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="CCLMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityType Name="distribution_centers">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="code" Type="int" />
+          <Property Name="name" Type="varchar" MaxLength="60" />
+          <Property Name="process_start_time" Type="time" Precision="7" />
+          <Property Name="process_end_time" Type="time" Precision="7" />
+          <Property Name="binnacle_days" Type="int" />
+          <Property Name="mail_success" Type="bit" />
+        </EntityType>
+        <EntityType Name="users">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nickname" Type="varchar" MaxLength="80" />
+          <Property Name="full_name" Type="varchar" MaxLength="120" />
+          <Property Name="email" Type="varchar" MaxLength="120" />
+          <Property Name="is_full" Type="bit" />
+        </EntityType>
+        <EntityType Name="users_distribution_centers">
+          <Key>
+            <PropertyRef Name="ts_users_id" />
+            <PropertyRef Name="ts_distribution_center_id" />
+          </Key>
+          <Property Name="ts_users_id" Type="int" Nullable="false" />
+          <Property Name="ts_distribution_center_id" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_distribution_center">
+          <End Role="distribution_centers" Type="Self.distribution_centers" Multiplicity="1" />
+          <End Role="users_distribution_centers" Type="Self.users_distribution_centers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="distribution_centers">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="users_distribution_centers">
+              <PropertyRef Name="ts_distribution_center_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_users">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="users_distribution_centers" Type="Self.users_distribution_centers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="users_distribution_centers">
+              <PropertyRef Name="ts_users_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CCLMModelStoreContainer">
+          <EntitySet Name="distribution_centers" EntityType="Self.distribution_centers" Schema="cclm" store:Type="Tables" />
+          <EntitySet Name="users" EntityType="Self.users" Schema="cclm" store:Type="Tables" />
+          <EntitySet Name="users_distribution_centers" EntityType="Self.users_distribution_centers" Schema="cclm" store:Type="Tables" />
+          <AssociationSet Name="FK_distribution_center" Association="Self.FK_distribution_center">
+            <End Role="distribution_centers" EntitySet="distribution_centers" />
+            <End Role="users_distribution_centers" EntitySet="users_distribution_centers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_users" Association="Self.FK_users">
+            <End Role="users" EntitySet="users" />
+            <End Role="users_distribution_centers" EntitySet="users_distribution_centers" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CCLMModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityType Name="distribution_centers">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="code" Type="Int32" />
+          <Property Name="name" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="process_start_time" Type="Time" Precision="7" />
+          <Property Name="process_end_time" Type="Time" Precision="7" />
+          <Property Name="binnacle_days" Type="Int32" />
+          <Property Name="mail_success" Type="Boolean" />
+          <NavigationProperty Name="users" Relationship="Self.users_distribution_centers" FromRole="distribution_centers" ToRole="users" />
+        </EntityType>
+        <EntityType Name="users">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nickname" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Name="full_name" Type="String" MaxLength="120" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="120" FixedLength="false" Unicode="false" />
+          <Property Name="is_full" Type="Boolean" />
+          <NavigationProperty Name="distribution_centers" Relationship="Self.users_distribution_centers" FromRole="users" ToRole="distribution_centers" />
+        </EntityType>
+        <Association Name="users_distribution_centers">
+          <End Role="distribution_centers" Type="Self.distribution_centers" Multiplicity="*" />
+          <End Role="users" Type="Self.users" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="CCLMEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="distribution_centers" EntityType="Self.distribution_centers" />
+          <EntitySet Name="users" EntityType="Self.users" />
+          <AssociationSet Name="users_distribution_centers" Association="Self.users_distribution_centers">
+            <End Role="distribution_centers" EntitySet="distribution_centers" />
+            <End Role="users" EntitySet="users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CCLMModelStoreContainer" CdmEntityContainer="CCLMEntities">
+          <EntitySetMapping Name="distribution_centers">
+            <EntityTypeMapping TypeName="CCLMModel.distribution_centers">
+              <MappingFragment StoreEntitySet="distribution_centers">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="process_start_time" ColumnName="process_start_time" />
+                <ScalarProperty Name="process_end_time" ColumnName="process_end_time" />
+                <ScalarProperty Name="binnacle_days" ColumnName="binnacle_days" />
+                <ScalarProperty Name="mail_success" ColumnName="mail_success" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="users">
+            <EntityTypeMapping TypeName="CCLMModel.users">
+              <MappingFragment StoreEntitySet="users">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nickname" ColumnName="nickname" />
+                <ScalarProperty Name="full_name" ColumnName="full_name" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="is_full" ColumnName="is_full" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="users_distribution_centers" TypeName="CCLMModel.users_distribution_centers" StoreEntitySet="users_distribution_centers">
+            <EndProperty Name="distribution_centers">
+              <ScalarProperty Name="id" ColumnName="ts_distribution_center_id" />
+            </EndProperty>
+            <EndProperty Name="users">
+              <ScalarProperty Name="id" ColumnName="ts_users_id" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
