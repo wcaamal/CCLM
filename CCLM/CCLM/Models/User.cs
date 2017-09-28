@@ -15,13 +15,20 @@ namespace CCLM.Models
         public string NickName { get; set; }
         [Display(Name = "Nombre")]
         public string FullName { get; set; }
+
         [Display(Name = "Correo")]
+        [DataType(DataType.EmailAddress)]
+        [RegularExpression(@"^[^@\s]+@[^@\s]+(\.[^@\s]+)+$", ErrorMessage = "Correo Inválido")]
         public string Email { get; set; }
+
+        [Display(Name="Admin")]
+        public bool IsFull { get; set; }
+
         [Display(Name = "Cedis Asignados")]
         public int DistributionCentersAmount { get; set; }
         //public List<DistributionCenter> DistributionCenters { get; set; }
 
-        [Display(Name="Centros de Distribucion")]
+        [Required, Display(Name="Centros de Distribucion")]
         public List<int> DistributionCentersSelected { get; set; }
 
         public SelectList DistributionCentersSelect { get; set; }

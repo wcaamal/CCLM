@@ -36,14 +36,38 @@ namespace CCLM.Controllers
         public ActionResult Edit(User model)
         {
             var userService = new UserService();
-            User user = userService.Get(model.Id);
+            userService.Update(model.Id, model);
 
             var dcService = new DistributionCenterService();
             var dcs = dcService.GetAll();
             IList<SelectListItem> listItems = dcs.Select(x => new SelectListItem { Value = x.Id.ToString(), Text = x.Code + " - " + x.Name }).ToList();
+            model.DistributionCentersSelect = new SelectList(listItems, "Value", "Text", String.Empty);
+            return RedirectToAction("Index");
+        }
 
-            user.DistributionCentersSelect = new SelectList(listItems, "Value", "Text", String.Empty);
+        public ActionResult Create()
+        {
+            var model = new User();
+            model.DistributionCentersSelected = new List<int>();
+            var dcService = new DistributionCenterService();
+            var dcs = dcService.GetAll();
+            IList<SelectListItem> listItems = dcs.Select(x => new SelectListItem { Value = x.Id.ToString(), Text = x.Code + " - " + x.Name }).ToList();
+            model.DistributionCentersSelect = new SelectList(listItems, "Value", "Text", String.Empty);
             return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Create(User model)
+        {
+
+            var userService = new UserService();
+            userService.Create(model);
+            var dcService = new DistributionCenterService();
+            var dcs = dcService.GetAll();
+            IList<SelectListItem> listItems = dcs.Select(x => new SelectListItem { Value = x.Id.ToString(), Text = x.Code + " - " + x.Name }).ToList();
+            model.DistributionCentersSelect = new SelectList(listItems, "Value", "Text", String.Empty);
+
+            return RedirectToAction("Index");
         }
     }
 }
