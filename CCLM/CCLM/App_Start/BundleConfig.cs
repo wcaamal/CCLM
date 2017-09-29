@@ -42,6 +42,21 @@ namespace CCLM
                         "~/Content/themes/base/jquery.ui.datepicker.css",
                         "~/Content/themes/base/jquery.ui.progressbar.css",
                         "~/Content/themes/base/jquery.ui.theme.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/jscustom").Include(
+                        "~/Content/sb-admin/vendor/jquery/jquery.min.js",
+                        "~/Content/sb-admin/vendor/bootstrap/js/bootstrap.min.js",
+                        "~/Content/sb-admin/vendor/metisMenu/metisMenu.min.js",
+                        "~/Content/sb-admin/dist/js/sb-admin-2.js"));
+
+            bundles.Add(new StyleBundle("~/Content/custom").Include(
+                        "~/Content/sb-admin/vendor/bootstrap/css/bootstrap.min.css",
+                        "~/Content/sb-admin/vendor/metisMenu/metisMenu.min.css",
+                        "~/Content/sb-admin/dist/css/sb-admin-2.css"
+                        ));
+
+            BundleTable.EnableOptimizations = true;
+            
         }
     }
 }

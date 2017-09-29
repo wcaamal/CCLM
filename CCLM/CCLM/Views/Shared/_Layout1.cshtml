@@ -7,26 +7,10 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <title>@ViewBag.Title - CCLM</title>
-    <!-- Bootstrap Core CSS -->
-    <link href="~/Content/sb-admin/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <!-- MetisMenu CSS -->
-    <link href="~/Content/sb-admin/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
     
-    <!-- Custom CSS -->
-    <link href="~/Content/sb-admin/dist/css/sb-admin-2.css" rel="stylesheet">
-    <!-- Custom Fonts -->
+    @Styles.Render("~/Content/custom")
     <link href="~/Content/sb-admin/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
-    <script src="~/Content/sb-admin/vendor/jquery/jquery.min.js"></script>
-    <!-- Bootstrap Core JavaScript -->
-    <script src="~/Content/sb-admin/vendor/bootstrap/js/bootstrap.min.js"></script>
-    <!-- Metis Menu Plugin JavaScript -->
-    <script src="~/Content/sb-admin/vendor/metisMenu/metisMenu.min.js"></script>
-    <!-- Custom Theme JavaScript -->
-    <script src="~/Content/sb-admin/dist/js/sb-admin-2.js"></script>
-
-    <script src="~/Scripts/jquery.validate.min.js"></script>
-    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    
     
 </head>
 <body>
@@ -51,7 +35,12 @@
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
                         <li>
-                            <a href="@Url.Action("Index","User")"><i class="fa fa-user fa-fw"></i> Usuario</a>
+                            <a href="@Url.Action("Index","DistributionCenter")"><i class="fa fa-user fa-fw"></i> Sitios </a>
+                        </li>
+                    </ul>
+                    <ul class="nav" id="side-menu">
+                        <li>
+                            <a href="@Url.Action("Index","User")"><i class="fa fa-user fa-fw"></i> Usuarios</a>
                         </li>
                     </ul>
                 </div>
@@ -84,7 +73,7 @@
         <!-- /#page-wrapper -->
     </div>
     <!-- /#wrapper -->
-    <!-- jQuery -->
-    
+    @Scripts.Render("~/bundles/jscustom")
+    @RenderSection("scripts", required: false)
 </body>
 </html>

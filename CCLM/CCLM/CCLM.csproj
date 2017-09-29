@@ -188,6 +188,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\DistributionCenterController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
@@ -228,6 +229,24 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\chosen_v1.8.2\chosen-sprite%402x.png" />
+    <Content Include="Content\chosen_v1.8.2\chosen-sprite.png" />
+    <Content Include="Content\chosen_v1.8.2\chosen.css" />
+    <Content Include="Content\chosen_v1.8.2\chosen.jquery.js" />
+    <Content Include="Content\chosen_v1.8.2\chosen.jquery.min.js" />
+    <Content Include="Content\chosen_v1.8.2\chosen.min.css" />
+    <Content Include="Content\chosen_v1.8.2\chosen.proto.js" />
+    <Content Include="Content\chosen_v1.8.2\chosen.proto.min.js" />
+    <Content Include="Content\chosen_v1.8.2\docsupport\chosen.png" />
+    <Content Include="Content\chosen_v1.8.2\docsupport\init.js" />
+    <Content Include="Content\chosen_v1.8.2\docsupport\init.proto.js" />
+    <Content Include="Content\chosen_v1.8.2\docsupport\oss-credit.png" />
+    <Content Include="Content\chosen_v1.8.2\docsupport\prism.css" />
+    <Content Include="Content\chosen_v1.8.2\docsupport\prism.js" />
+    <Content Include="Content\chosen_v1.8.2\docsupport\style.css" />
+    <Content Include="Content\chosen_v1.8.2\index.html" />
+    <Content Include="Content\chosen_v1.8.2\index.proto.html" />
+    <Content Include="Content\chosen_v1.8.2\options.html" />
     <Content Include="Content\sb-admin\data\flot-data.js" />
     <Content Include="Content\sb-admin\data\morris-data.js" />
     <Content Include="Content\sb-admin\dist\css\sb-admin-2.css" />
@@ -468,6 +487,8 @@
     <Content Include="Content\sb-admin\vendor\font-awesome\scss\_spinning.scss" />
     <Content Include="Content\sb-admin\vendor\font-awesome\scss\_stacked.scss" />
     <Content Include="Content\sb-admin\vendor\font-awesome\scss\_variables.scss" />
+    <Content Include="Content\chosen_v1.8.2\bower.json" />
+    <Content Include="Content\chosen_v1.8.2\package.json" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -531,6 +552,9 @@
     <Content Include="Views\User\Edit.cshtml" />
     <Content Include="Views\Shared\_Layout1.cshtml" />
     <Content Include="Views\User\Create.cshtml" />
+    <Content Include="Views\DistributionCenter\Index.cshtml" />
+    <Content Include="Views\DistributionCenter\Create.cshtml" />
+    <Content Include="Views\DistributionCenter\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
