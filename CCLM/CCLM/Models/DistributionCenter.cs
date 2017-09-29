@@ -19,5 +19,7 @@ namespace CCLM.Models
         public TimeSpan ProcessEndTime { get; set; }
         [Display(Name = "Dias Bitacora")]
         public int BinnacleDays { get; set; }
+        [Display(Name="Envia Correo")]
+        public bool MailSuccess { get; set; } 
     }
 }

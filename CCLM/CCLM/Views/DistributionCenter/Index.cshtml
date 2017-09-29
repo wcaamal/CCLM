@@ -30,6 +30,7 @@
                             <th>@Html.DisplayNameFor(m => m.ProcessStartTime)</th>
                             <th>@Html.DisplayNameFor(m => m.ProcessEndTime)</th>
                             <th>@Html.DisplayNameFor(m => m.BinnacleDays)</th>
+                            <th>@Html.DisplayNameFor(m => m.MailSuccess)</th>
 
                             <th></th>
                         </tr>
@@ -43,6 +44,7 @@
                                 <td>@Html.DisplayFor(x => row.ProcessStartTime)</td>
                                 <td>@Html.DisplayFor(x => row.ProcessEndTime)</td>
                                 <td>@Html.DisplayFor(x => row.BinnacleDays)</td>
+                                <td>@Html.DisplayFor(x => row.MailSuccess)</td>
 
                                 <td><a href="@Url.Action("Edit", "DistributionCenter", new { id = row.Id })" type="submit" title="Editar usuario" class="btn btn-primary btn-circle"><i class="fa fa-edit"></i></a></td>
                             </tr>

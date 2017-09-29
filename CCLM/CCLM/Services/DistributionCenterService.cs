@@ -20,7 +20,8 @@ namespace CCLM.Services
                     Name = x.name,
                     ProcessEndTime = x.process_end_time.Value,
                     ProcessStartTime = x.process_start_time.Value,
-                    BinnacleDays = x.binnacle_days.Value
+                    BinnacleDays = x.binnacle_days.Value,
+                    MailSuccess = x.mail_success.Value
                 }).ToList();
             }
         }
@@ -37,7 +38,7 @@ namespace CCLM.Services
                     process_start_time = model.ProcessStartTime,
                     process_end_time = model.ProcessEndTime,
                     binnacle_days = model.BinnacleDays,
-                    mail_success = false
+                    mail_success = model.MailSuccess
                 });
                 Entities.SaveChanges();
 
@@ -54,11 +55,12 @@ namespace CCLM.Services
                 return new DistributionCenter
                 {
                     Id = dsEntity.id,
-                    Code=dsEntity.code.Value,
-                    Name=dsEntity.name,
-                    ProcessStartTime=dsEntity.process_start_time.Value,
-                    ProcessEndTime=dsEntity.process_end_time.Value,
-                    BinnacleDays=dsEntity.binnacle_days.Value
+                    Code = dsEntity.code.Value,
+                    Name = dsEntity.name,
+                    ProcessStartTime = dsEntity.process_start_time.Value,
+                    ProcessEndTime = dsEntity.process_end_time.Value,
+                    BinnacleDays = dsEntity.binnacle_days.Value,
+                    MailSuccess = dsEntity.mail_success.Value
                 };
             }
         }
@@ -76,6 +78,7 @@ namespace CCLM.Services
                 dsEntity.process_start_time=model.ProcessStartTime;
                 dsEntity.process_end_time=model.ProcessEndTime;
                 dsEntity.binnacle_days=model.BinnacleDays;
+                dsEntity.mail_success = model.MailSuccess;
 
                 Entities.SaveChanges();
 
