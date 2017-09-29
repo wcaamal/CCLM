@@ -28,7 +28,7 @@ namespace CCLM.Models
         public int DistributionCentersAmount { get; set; }
         //public List<DistributionCenter> DistributionCenters { get; set; }
 
-        [Required, Display(Name="Centros de Distribucion")]
+        [Required, Display(Name="Sitios")]
         public List<int> DistributionCentersSelected { get; set; }
 
         public SelectList DistributionCentersSelect { get; set; }
