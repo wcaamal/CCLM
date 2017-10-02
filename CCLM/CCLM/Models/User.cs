@@ -11,7 +11,7 @@ namespace CCLM.Models
     {
         
         public int Id { get; set; }
-        [Display(Name = "NickName")]
+        [Display(Name = "Usuario")]
         public string NickName { get; set; }
         [Display(Name = "Nombre")]
         public string FullName { get; set; }

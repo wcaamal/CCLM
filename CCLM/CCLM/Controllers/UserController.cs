@@ -69,5 +69,13 @@ namespace CCLM.Controllers
 
             return RedirectToAction("Index");
         }
+
+        [HttpGet]
+        public JsonResult GetUserData(string nn)
+        {
+            var userService = new UserService();
+            var user = userService.GetUserInformation(nn);
+            return Json(user, JsonRequestBehavior.AllowGet);
+        }
     }
 }

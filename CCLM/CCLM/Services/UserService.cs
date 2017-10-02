@@ -2,6 +2,7 @@
 using CCLM.ORM;
 using System;
 using System.Collections.Generic;
+using System.DirectoryServices;
 using System.Linq;
 using System.Web;
 
@@ -98,6 +99,84 @@ namespace CCLM.Services
         private ICollection<distribution_centers> GenerateDS(CCLMEntities Entities, List<int> DSIds)
         {
             return Entities.distribution_centers.Where(x => DSIds.Contains(x.id)).ToList();
+        }
+
+        internal User GetUserInformation_(string user_active)
+        {
+            return new User { Email = "wcaamal@gmail.com", FullName = "William Caamal" };
+        }
+
+        internal User GetUserInformation(string user_active)
+        {
+            string[] user_info = user_active.Split(new string[] { "\\" }, StringSplitOptions.None);
+            string domain = "LDAP://" + user_info[0];
+            string alias = user_info[1];
+            string mail = "";
+            string full_name = "";
+            User user = new User();
+
+            SearchResultCollection sResults = null;
+
+            try
+            {
+                //modify this line to include your domain name
+                string path = domain;
+                //init a directory entry
+                DirectoryEntry dEntry = new DirectoryEntry(path);
+
+                //init a directory searcher
+                DirectorySearcher dSearcher = new DirectorySearcher(dEntry);
+
+                //This line applies a filter to the search specifying a username to search for
+                //modify this line to specify a user name. if you want to search for all
+                //users who start with k - set SearchString to "k"
+                //dSearcher.Filter = "(&(objectClass=user))";
+                dSearcher.Filter = "(&(objectClass=user)(samaccountname= " + alias + "*))";
+
+                //perform search on active directory
+                sResults = dSearcher.FindAll();
+
+                //loop through results of search
+                foreach (SearchResult searchResult in sResults)
+                {
+                    mail = GetProperty(searchResult, "mail");
+                    full_name = GetProperty(searchResult, "cn");
+                    if (mail.Length > 0 && full_name.Length > 0)
+                    {
+                        user.NickName = user_active;
+                        user.Email = mail;
+                        user.FullName = full_name;
+                    }
+                }
+            }
+            catch (InvalidOperationException iOe)
+            {
+                //
+            }
+            catch (NotSupportedException nSe)
+            {
+                //
+            }
+            finally
+            {
+
+                // dispose of objects used
+                if (sResults != null)
+                    sResults.Dispose();
+
+            }
+
+            return user;
+        }
+
+        public string GetProperty(SearchResult result, string property) //Meotodo para llenar el objeto con la información de Active Directory
+        {
+            if (result != null)
+            {
+                ResultPropertyValueCollection val = (ResultPropertyValueCollection)result.Properties[property][0];
+                return val.ToString();
+            }
+            return null;
         }
     }
 }
